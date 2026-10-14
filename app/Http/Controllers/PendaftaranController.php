@@ -13,7 +13,7 @@ class PendaftaranController extends Controller
 {
     public function create(): View
     {
-        $majors = Major::where('is_active', true)->orderBy('nama_jurusan')->get();
+        $majors = Major::where('is_active', true)->orderBy('id')->get();
 
         return view('pendaftaran.create', compact('majors'));
     }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Major;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -45,5 +46,22 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
             ]
         );
+
+        // Data jurusan untuk form pendaftaran (Pilihan 1 & 2)
+        $jurusan = [
+            ['kode_jurusan' => 'RPL', 'nama_jurusan' => 'Rekayasa Perangkat Lunak', 'kuota' => 72],
+            ['kode_jurusan' => 'TJKT', 'nama_jurusan' => 'Teknik Jaringan Komputer dan Telekomunikasi', 'kuota' => 72],
+            ['kode_jurusan' => 'AKL', 'nama_jurusan' => 'Akuntansi dan Keuangan Lembaga', 'kuota' => 72],
+            ['kode_jurusan' => 'DKV', 'nama_jurusan' => 'Desain Komunikasi Visual', 'kuota' => 72],
+            ['kode_jurusan' => 'MPLB', 'nama_jurusan' => 'Manajemen Perkantoran dan Layanan Bisnis', 'kuota' => 72],
+            ['kode_jurusan' => 'TO', 'nama_jurusan' => 'Teknik Otomotif', 'kuota' => 72],
+        ];
+
+        foreach ($jurusan as $j) {
+            Major::updateOrCreate(
+                ['kode_jurusan' => $j['kode_jurusan']],
+                ['nama_jurusan' => $j['nama_jurusan'], 'kuota' => $j['kuota'], 'is_active' => true]
+            );
+        }
     }
 }
